@@ -5,6 +5,6 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class StudentGetAllResponse extends AbstractGetAllResponse {
+public class StudentsGetAllPaginatedResponse extends AbstractGetAllResponse {
 
 }

@@ -4,7 +4,7 @@ import com.practice.mongodb.entities.Student;
 import lombok.Data;
 
 @Data
-public class StudentGetResponse {
+public class StudentGetWithIdResponse {
 
     private Student student;
 

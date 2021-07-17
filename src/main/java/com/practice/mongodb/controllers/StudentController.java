@@ -29,10 +29,10 @@ public class StudentController {
 
     @GetMapping("api/students/get/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public StudentGetResponse getStudentRequest(@PathVariable final String id) {
-        final Student student = studentService.getStudent(id);
+    public StudentGetWithIdResponse getStudentWithIdRequest(@PathVariable final String id) {
+        final Student student = studentService.getStudentWithId(id);
 
-        final StudentGetResponse response = new StudentGetResponse();
+        final StudentGetWithIdResponse response = new StudentGetWithIdResponse();
 
         response.setStudent(student);
 
@@ -76,17 +76,32 @@ public class StudentController {
         return response;
     }
 
-    @GetMapping("api/students/get/all-with-pagination")
+    @GetMapping("api/students/get/all-paginated")
     @ResponseStatus(HttpStatus.OK)
-    public StudentsGetAllWithPaginationResponse getAllStudentsWithPaginationRequest(@RequestParam final int pageNo,
+    public StudentsGetAllPaginatedResponse getAllStudentsPaginatedRequest(@RequestParam final int pageNo,
             @RequestParam final int pageSize) {
 
-        final List<Student> studentsWithPagination = studentService.getAllStudentsWithPagination(pageNo, pageSize);
+        final List<Student> studentsPaginated = studentService.getAllStudentsPaginated(pageNo, pageSize);
 
-        final StudentsGetAllWithPaginationResponse response = new StudentsGetAllWithPaginationResponse();
+        final StudentsGetAllPaginatedResponse response = new StudentsGetAllPaginatedResponse();
 
-        response.setCount(studentsWithPagination.size());
-        response.setStudents(studentsWithPagination);
+        response.setCount(studentsPaginated.size());
+        response.setStudents(studentsPaginated);
+
+        return response;
+    }
+
+    @GetMapping("api/students/get/all-sorted")
+    @ResponseStatus(HttpStatus.OK)
+    public StudentGetAllSortedResponse getAllStudentsSortedRequest(@RequestParam final String sortBy,
+            @RequestParam final String direction) {
+
+        final List<Student> studentsSorted = studentService.getAllStudentsSorted(sortBy, direction);
+
+        final StudentGetAllSortedResponse response = new StudentGetAllSortedResponse();
+
+        response.setCount(studentsSorted.size());
+        response.setStudents(studentsSorted);
 
         return response;
     }

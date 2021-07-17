@@ -5,6 +5,7 @@ import com.practice.mongodb.repositories.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getStudent(final String id) {
+    public Student getStudentWithId(final String id) {
 
         return studentRepository.findStudentById(id);
     }
@@ -52,9 +53,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getAllStudentsWithPagination(final int pageNo, final int pageSize) {
+    public List<Student> getAllStudentsPaginated(final int pageNo, final int pageSize) {
         final Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
         return studentRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public List<Student> getAllStudentsSorted(final String sortBy, final String direction) {
+        final Sort sort = Sort.by(Sort.Direction.valueOf(direction), sortBy);
+
+        return studentRepository.findAll(sort);
     }
 }
