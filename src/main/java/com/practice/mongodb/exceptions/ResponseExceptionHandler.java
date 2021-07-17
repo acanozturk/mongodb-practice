@@ -11,8 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {RuntimeException.class})
-    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
-    public ExceptionResponse handleNullPointerException(RuntimeException exception) {
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public ExceptionResponse exceptionHandler(RuntimeException exception) {
         final ExceptionResponse exceptionResponse = new ExceptionResponse();
 
         exceptionResponse.setMessage(exception.getMessage());

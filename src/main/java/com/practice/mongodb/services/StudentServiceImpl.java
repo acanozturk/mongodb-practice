@@ -15,6 +15,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void createStudent(final Student student) {
+        
         studentRepository.save(student);
     }
 
@@ -31,13 +32,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudent(final Student student) {
+    public void updateStudent(final Student student) throws NullPointerException {
         final String email = student.getEmail();
-
-        if(email == null) {
-            createStudent(student);
-        }
-
         final Student studentByEmail = studentRepository.findStudentByEmail(email);
         final String id = studentByEmail.getId();
 
