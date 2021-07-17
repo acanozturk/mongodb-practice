@@ -3,6 +3,8 @@ package com.practice.mongodb.services;
 import com.practice.mongodb.entities.Student;
 import com.practice.mongodb.repositories.StudentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,5 +49,12 @@ public class StudentServiceImpl implements StudentService {
         final Student student = studentRepository.findStudentById(id);
 
         studentRepository.delete(student);
+    }
+
+    @Override
+    public List<Student> getAllStudentsWithPagination(final int pageNo, final int pageSize) {
+        final Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+
+        return studentRepository.findAll(pageable).getContent();
     }
 }

@@ -11,4 +11,5 @@ public interface StudentService {
     List<Student> getAllStudents();
     void updateStudent(Student student);
     void deleteStudent(String id);
+    List<Student> getAllStudentsWithPagination(int pageNo, int pageSize);
 }

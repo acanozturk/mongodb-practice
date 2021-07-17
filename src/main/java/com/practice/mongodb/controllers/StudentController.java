@@ -46,6 +46,7 @@ public class StudentController {
 
         final StudentGetAllResponse response = new StudentGetAllResponse();
 
+        response.setCount(students.size());
         response.setStudents(students);
 
         return response;
@@ -74,4 +75,20 @@ public class StudentController {
 
         return response;
     }
+
+    @GetMapping("api/students/get/all-with-pagination")
+    @ResponseStatus(HttpStatus.OK)
+    public StudentsGetAllWithPaginationResponse getAllStudentsWithPaginationRequest(@RequestParam final int pageNo,
+            @RequestParam final int pageSize) {
+
+        final List<Student> studentsWithPagination = studentService.getAllStudentsWithPagination(pageNo, pageSize);
+
+        final StudentsGetAllWithPaginationResponse response = new StudentsGetAllWithPaginationResponse();
+
+        response.setCount(studentsWithPagination.size());
+        response.setStudents(studentsWithPagination);
+
+        return response;
+    }
+
 }

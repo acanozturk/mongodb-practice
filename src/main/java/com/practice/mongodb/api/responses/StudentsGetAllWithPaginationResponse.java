@@ -6,9 +6,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class StudentGetAllResponse {
+public class StudentsGetAllWithPaginationResponse {
 
     private int count;
     private List<Student> students;
-
 }
