@@ -28,7 +28,6 @@ public class StudentController {
     }
 
     @GetMapping("api/students/get/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public StudentGetWithIdResponse getStudentWithIdRequest(@PathVariable final String id) {
         final Student student = studentService.getStudentWithId(id);
 
@@ -40,7 +39,6 @@ public class StudentController {
     }
 
     @GetMapping("api/students/get/all")
-    @ResponseStatus(HttpStatus.OK)
     public StudentGetAllResponse getAllStudentsRequest() {
         final List<Student> students = studentService.getAllStudents();
 
@@ -53,7 +51,6 @@ public class StudentController {
     }
 
     @PutMapping("api/students/update")
-    @ResponseStatus(HttpStatus.OK)
     public StudentUpdateResponse updateStudentRequest(@RequestBody final Student student) {
         studentService.updateStudent(student);
 
@@ -65,7 +62,6 @@ public class StudentController {
     }
 
     @DeleteMapping("api/students/delete/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public StudentDeleteResponse deleteStudentRequest(@PathVariable final String id) {
         studentService.deleteStudent(id);
 
@@ -77,7 +73,6 @@ public class StudentController {
     }
 
     @GetMapping("api/students/get/all-paginated")
-    @ResponseStatus(HttpStatus.OK)
     public StudentsGetAllPaginatedResponse getAllStudentsPaginatedRequest(@RequestParam final int pageNo,
             @RequestParam final int pageSize) {
 
@@ -92,7 +87,6 @@ public class StudentController {
     }
 
     @GetMapping("api/students/get/all-sorted")
-    @ResponseStatus(HttpStatus.OK)
     public StudentGetAllSortedResponse getAllStudentsSortedRequest(@RequestParam final String sortBy,
             @RequestParam final String direction) {
 
