@@ -18,7 +18,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void createStudent(final Student student) {
-        
+        if(doesStudentExists(student)) {
+            throw new IllegalArgumentException("Student already exists");
+        }
+
         studentRepository.save(student);
     }
 
@@ -35,12 +38,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudent(final Student student) throws NullPointerException {
-        final String email = student.getEmail();
-        final Student studentByEmail = studentRepository.findStudentByEmail(email);
-        final String id = studentByEmail.getId();
+    public void updateStudent(final Student student) {
+        if(!doesStudentExists(student)) {
+            throw new NullPointerException("Student does not exits");
+        }
 
-        student.setId(id);
+        student.setId(getStudentId(student));
 
         studentRepository.save(student);
     }
@@ -65,4 +68,18 @@ public class StudentServiceImpl implements StudentService {
 
         return studentRepository.findAll(sort);
     }
+
+    private boolean doesStudentExists(final Student student) {
+        final String email = student.getEmail();
+
+        return studentRepository.findStudentByEmail(email) != null;
+    }
+
+    private String getStudentId(final Student student) {
+        final String email = student.getEmail();
+        final Student studentByEmail = studentRepository.findStudentByEmail(email);
+
+        return studentByEmail.getId();
+    }
+
 }

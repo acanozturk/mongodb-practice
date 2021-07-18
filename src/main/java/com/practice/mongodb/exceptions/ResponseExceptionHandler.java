@@ -12,7 +12,17 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {RuntimeException.class})
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-    public ExceptionResponse exceptionHandler(RuntimeException exception) {
+    public ExceptionResponse runtimeExceptionHandler(final RuntimeException exception) {
+        final ExceptionResponse exceptionResponse = new ExceptionResponse();
+
+        exceptionResponse.setMessage(exception.getMessage());
+
+        return exceptionResponse;
+    }
+
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public ExceptionResponse illegalArgumentExceptionHandler(final RuntimeException exception) {
         final ExceptionResponse exceptionResponse = new ExceptionResponse();
 
         exceptionResponse.setMessage(exception.getMessage());

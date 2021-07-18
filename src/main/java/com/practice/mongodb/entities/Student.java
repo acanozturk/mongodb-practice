@@ -1,28 +1,25 @@
 package com.practice.mongodb.entities;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Document(collection = "students")
-public class Student {
-
-    @Id
-    private String id;
+public class Student extends AbstractBaseEntity {
 
     @Field(name = "name")
-    @NotBlank
+    @NotNull(message = "Field cannot be null.")
     private String name;
 
     @Field(name = "email")
-    @Email
+    @Email(message = "Please enter a valid email.")
     private String email;
 
     @Field(name = "department")
